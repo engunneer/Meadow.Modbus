@@ -25,7 +25,7 @@ internal class TcpResponse
         // 2 bytes of coil address
         // values written (ff == on, 00 == off)
 
-        // if we're responsing to a write request, the result payload is at offset 10 and is always 2 bytes (written length?)
+        // if we're responding to a write request, the result payload is at offset 10 and is always 2 bytes (written length?)
 
         Buffer.BlockCopy(BitConverter.GetBytes(IPAddress.NetworkToHostOrder(lengthWritten)), 0, data, 10, 2);
 

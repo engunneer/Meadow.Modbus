@@ -336,7 +336,7 @@ public abstract class ModbusClientBase : IModbusBusClient, IDisposable
         msgSegment[1] = (byte)(values.Count() & 0xFF);  // Qty of coils LO
         msgSegment[2] = (byte)byteArrayLength;          // Byte count
 
-        new BitArray(values.ToArray()).CopyTo(msgSegment, 3); // Concatinate bool binary values list as converted bytes
+        new BitArray(values.ToArray()).CopyTo(msgSegment, 3); // Concatenate bool binary values list as converted bytes
 
         var message = GenerateWriteMessage(modbusAddress, ModbusFunction.WriteMultipleCoils, startRegister, msgSegment);
         await _syncRoot.WaitAsync();
