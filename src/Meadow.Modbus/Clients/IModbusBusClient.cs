@@ -36,39 +36,36 @@ public interface IModbusBusClient
     void Disconnect();
 
     /// <summary>
-    /// Writes a single value to the given register on a device
+    /// Writes a single value to the given register on a device.
     /// </summary>
-    /// <param name="modbusAddress"></param>
-    /// <param name="register"></param>
-    /// <param name="value"></param>
+    /// <param name="modbusAddress">The target device modbus address</param>
+    /// <param name="register">The register to write</param>
+    /// <param name="value">The 16-bit value to write.</param>
     Task WriteHoldingRegister(byte modbusAddress, ushort register, ushort value);
 
     /// <summary>
-    /// Writes multiple values to holding registers (modbus function 16)
+    /// Writes multiple values to holding registers (modbus function 16).
     /// </summary>
-    /// <param name="modbusAddress">The target device modbus address</param>
-    /// <param name="startRegister">The first register to begin writing</param>
-    /// <param name="values">The registers (16-bit values) to write</param>
-    /// <returns></returns>
+    /// <param name="modbusAddress">The target device modbus address.</param>
+    /// <param name="startRegister">The first register to begin writing.</param>
+    /// <param name="values">The 16-bit values to write.</param>
     Task WriteHoldingRegisters(byte modbusAddress, ushort startRegister, IEnumerable<ushort> values);
 
     /// <summary>
-    /// Reads the requested number of holding registers from a device
+    /// Reads the requested number of holding registers from a device.
     /// </summary>
-    /// <param name="modbusAddress"></param>
-    /// <param name="startRegister"></param>
-    /// <param name="registerCount"></param>
-    /// <returns></returns>
+    /// <param name="modbusAddress">The target device modbus address.</param>
+    /// <param name="startRegister">The first register to begin reading.</param>
+    /// <param name="registerCount">The number of registers to read.</param>
     Task<ushort[]> ReadHoldingRegisters(byte modbusAddress, ushort startRegister, int registerCount);
 
     /// <summary>
-    /// Reads the requested number of floats from the holding registers
-    /// Each float is two sequential registers
+    /// Reads the requested number of floats from the holding registers.
+    /// Each float is two sequential registers.
     /// </summary>
-    /// <param name="modbusAddress"></param>
-    /// <param name="startRegister"></param>
-    /// <param name="floatCount"></param>
-    /// <returns></returns>
+    /// <param name="modbusAddress">The target device modbus address.</param>
+    /// <param name="startRegister">The first register to begin reading.</param>
+    /// <param name="floatCount">The number of floating point values to read.</param>
     Task<float[]> ReadHoldingRegistersFloat(byte modbusAddress, ushort startRegister, int floatCount);
 
     /// <summary>
