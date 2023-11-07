@@ -113,7 +113,7 @@ public class ModbusTcpClient : ModbusClientBase, IDisposable
         // transaction ID
         _transaction++;
         message[0] = (byte)(_transaction >> 8);
-        message[1] = (byte)(_transaction & 0xff); ;
+        message[1] = (byte)(_transaction & 0xff);
 
         // protocol (0 == TCP)
         message[2] = 0;
@@ -158,7 +158,7 @@ public class ModbusTcpClient : ModbusClientBase, IDisposable
         // transaction ID
         _transaction++;
         message[0] = (byte)(_transaction >> 8);
-        message[1] = (byte)(_transaction & 0xff); ;
+        message[1] = (byte)(_transaction & 0xff);
 
         // protocol (0 == TCP)
         message[2] = 0;
