@@ -123,7 +123,7 @@ public class ModbusRtuClient : ModbusClientBase
             var errorCode = (ModbusErrorCode)errpacket[2];
 
             expectedCrc = RtuHelpers.Crc(errpacket, 0, errpacket.Length - 2);
-            actualCrc = (ushort)(errpacket[errpacket.Length - 2] | errpacket[errpacket.Length - 1] << 8);
+            actualCrc = (ushort)(errpacket[^2] | errpacket[^1] << 8);
             if (expectedCrc != actualCrc)
             {
                 throw new CrcException($"CRC error in {errorCode} message", expectedCrc, actualCrc, errpacket);
@@ -176,7 +176,7 @@ public class ModbusRtuClient : ModbusClientBase
 
         // do a CRC on all but the last 2 bytes, then see if that matches the last 2
         expectedCrc = RtuHelpers.Crc(buffer, 0, buffer.Length - 2);
-        actualCrc = (ushort)(buffer[buffer.Length - 2] | buffer[buffer.Length - 1] << 8);
+        actualCrc = (ushort)(buffer[^2] | buffer[^1] << 8);
         if (expectedCrc != actualCrc)
         {
             throw new CrcException("CRC error in response message", expectedCrc, actualCrc, buffer);
@@ -184,7 +184,7 @@ public class ModbusRtuClient : ModbusClientBase
 
         if (resultLen == 0)
         {   //happens on write multiples
-            return new byte[0];
+            return Array.Empty<byte>();
         }
 
         var result = new byte[resultLen];

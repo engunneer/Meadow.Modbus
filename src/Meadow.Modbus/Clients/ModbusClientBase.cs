@@ -176,9 +176,9 @@ public abstract class ModbusClientBase : IModbusBusClient, IDisposable
             startRegister -= 40001;
         }
 
-        if (values.Count() == 0)
+        if (!values.Any())
         {
-            throw new ArgumentOutOfRangeException("Parameter 'values' contains no data");
+            throw new ArgumentOutOfRangeException(nameof(values), "Parameter 'values' contains no data");
         }
 
         // swap endianness, because Modbus
